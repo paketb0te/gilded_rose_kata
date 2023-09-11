@@ -26,16 +26,7 @@ def update_quality_of_single_item(item: Item):
     if item.name == AGED_BRIE:
         update_aged_brie(item)
     elif item.name == BACKSTAGE_PASSES:
-        if item.quality < 50:
-            item.quality = item.quality + 1
-            if item.sell_in < 10:
-                if item.quality < 50:
-                    item.quality = item.quality + 1
-            if item.sell_in < 5:
-                if item.quality < 50:
-                    item.quality = item.quality + 1
-        if item.sell_in < 0:
-            item.quality = item.quality - item.quality
+        update_backstage_passes(item)
     elif item.name == SULFURAS:
         pass
     else:
@@ -44,6 +35,19 @@ def update_quality_of_single_item(item: Item):
         if item.sell_in < 0:
             if item.quality > 0:
                 item.quality = item.quality - 1
+
+
+def update_backstage_passes(item: Item):
+    if item.quality < 50:
+        item.quality = item.quality + 1
+        if item.sell_in < 10:
+            if item.quality < 50:
+                item.quality = item.quality + 1
+        if item.sell_in < 5:
+            if item.quality < 50:
+                item.quality = item.quality + 1
+    if item.sell_in < 0:
+        item.quality = item.quality - item.quality
 
 
 def update_aged_brie(item: Item):
