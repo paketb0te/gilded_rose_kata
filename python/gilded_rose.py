@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 from typing import Protocol
 
-AGED_BRIE = "Aged Brie"
-BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert"
-SULFURAS = "Sulfuras, Hand of Ragnaros"
+ItemName = str
+
+AGED_BRIE: ItemName = "Aged Brie"
+BACKSTAGE_PASSES: ItemName = "Backstage passes to a TAFKAL80ETC concert"
+SULFURAS: ItemName = "Sulfuras, Hand of Ragnaros"
 
 
 class Item:
-    def __init__(self, name: str, sell_in: int, quality: int):
+    def __init__(self, name: ItemName, sell_in: int, quality: int):
         self.name = name
         self.sell_in = sell_in
         self.quality = quality
@@ -51,12 +53,12 @@ def update_sulfuras(item: Item):
     pass
 
 
-class QualityUpdateFunc(Protocol):
+class ItemUpdateFunc(Protocol):
     def __call__(self, item: Item) -> None:
         ...
 
 
-UPDATER_MAPPING: dict[str, QualityUpdateFunc] = {
+UPDATER_MAPPING: dict[ItemName, ItemUpdateFunc] = {
     AGED_BRIE: update_aged_brie,
     BACKSTAGE_PASSES: update_backstage_passes,
     SULFURAS: update_sulfuras,
