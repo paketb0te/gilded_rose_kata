@@ -21,7 +21,17 @@ def update_quality_of_all_items(items: list[Item]):
 
 
 def update_quality_of_single_item(item: Item):
-    if item.name == AGED_BRIE or item.name == BACKSTAGE_PASSES:
+    if item.name == AGED_BRIE:
+        if item.quality < 50:
+            item.quality = item.quality + 1
+            if item.name == BACKSTAGE_PASSES:
+                if item.sell_in < 11:
+                    if item.quality < 50:
+                        item.quality = item.quality + 1
+                if item.sell_in < 6:
+                    if item.quality < 50:
+                        item.quality = item.quality + 1
+    elif item.name == BACKSTAGE_PASSES:
         if item.quality < 50:
             item.quality = item.quality + 1
             if item.name == BACKSTAGE_PASSES:
