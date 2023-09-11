@@ -18,6 +18,11 @@ class Item:
         return "%s, %s, %s" % (self.name, self.sell_in, self.quality)
 
 
+class ItemUpdateFunc(Protocol):
+    def __call__(self, item: Item) -> None:
+        ...
+
+
 def update_default_item(item: Item):
     item.sell_in -= 1
 
@@ -51,11 +56,6 @@ def update_backstage_passes(item: Item):
 
 def update_sulfuras(item: Item):
     pass
-
-
-class ItemUpdateFunc(Protocol):
-    def __call__(self, item: Item) -> None:
-        ...
 
 
 UPDATER_MAPPING: dict[ItemName, ItemUpdateFunc] = {
