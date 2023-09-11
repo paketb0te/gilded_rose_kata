@@ -21,16 +21,18 @@ def update_quality_of_all_items(items: list[Item]):
 
 
 def update_quality_of_single_item(item: Item):
+    update_sell_in_date(item)
+
     if item.name == AGED_BRIE:
         if item.quality < 50:
             item.quality = item.quality + 1
     elif item.name == BACKSTAGE_PASSES:
         if item.quality < 50:
             item.quality = item.quality + 1
-            if item.sell_in < 11:
+            if item.sell_in < 10:
                 if item.quality < 50:
                     item.quality = item.quality + 1
-            if item.sell_in < 6:
+            if item.sell_in < 5:
                 if item.quality < 50:
                     item.quality = item.quality + 1
     elif item.name == SULFURAS:
@@ -39,10 +41,6 @@ def update_quality_of_single_item(item: Item):
         if item.quality > 0:
             item.quality = item.quality - 1
 
-    if item.name == SULFURAS:
-        pass
-    else:
-        item.sell_in = item.sell_in - 1
     if item.sell_in < 0:
         if item.name == AGED_BRIE:
             if item.quality < 50:
@@ -56,3 +54,10 @@ def update_quality_of_single_item(item: Item):
                         pass
                     else:
                         item.quality = item.quality - 1
+
+
+def update_sell_in_date(item: Item):
+    if item.name == SULFURAS:
+        pass
+    else:
+        item.sell_in = item.sell_in - 1
