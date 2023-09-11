@@ -28,9 +28,13 @@ def update_quality_of_single_item(item: Item):
     elif item.name == BACKSTAGE_PASSES:
         update_backstage_passes(item)
     elif item.name == SULFURAS:
-        pass
+        update_sulfuras(item)
     else:
         update_default_item(item)
+
+
+def update_sulfuras(item: Item):
+    pass
 
 
 def update_default_item(item: Item):
