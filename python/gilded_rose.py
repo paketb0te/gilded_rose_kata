@@ -24,11 +24,7 @@ def update_quality_of_single_item(item: Item):
     update_sell_in_date(item)
 
     if item.name == AGED_BRIE:
-        if item.quality < 50:
-            item.quality = item.quality + 1
-        if item.sell_in < 0:
-            if item.quality < 50:
-                item.quality = item.quality + 1
+        update_aged_brie(item)
     elif item.name == BACKSTAGE_PASSES:
         if item.quality < 50:
             item.quality = item.quality + 1
@@ -48,6 +44,14 @@ def update_quality_of_single_item(item: Item):
         if item.sell_in < 0:
             if item.quality > 0:
                 item.quality = item.quality - 1
+
+
+def update_aged_brie(item: Item):
+    if item.quality < 50:
+        item.quality = item.quality + 1
+    if item.sell_in < 0:
+        if item.quality < 50:
+            item.quality = item.quality + 1
 
 
 def update_sell_in_date(item: Item):
