@@ -57,11 +57,9 @@ def update_backstage_passes(item: Item):
 
 
 def update_aged_brie(item: Item):
-    if item.quality < 50:
-        item.quality = item.quality + 1
-    if item.sell_in < 0:
-        if item.quality < 50:
-            item.quality = item.quality + 1
+    increase = 2 if item.sell_in < 0 else 1
+    new_quality = item.quality + increase
+    item.quality = min(new_quality, 50)
 
 
 def update_sell_in_date(item: Item):
