@@ -33,12 +33,12 @@ def update_quality_of_single_item(item: Item):
             if item.sell_in < 6:
                 if item.quality < 50:
                     item.quality = item.quality + 1
+    elif item.name == SULFURAS:
+        pass
     else:
         if item.quality > 0:
-            if item.name == SULFURAS:
-                pass
-            else:
-                item.quality = item.quality - 1
+            item.quality = item.quality - 1
+
     if item.name == SULFURAS:
         pass
     else:
