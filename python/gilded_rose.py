@@ -40,20 +40,11 @@ def update_quality_of_single_item(item: Item):
                     item.quality = item.quality + 1
         if item.sell_in < 0:
             item.quality = item.quality - item.quality
-
     elif item.name == SULFURAS:
         pass
     else:
         if item.quality > 0:
             item.quality = item.quality - 1
-
-    if item.name == AGED_BRIE:
-        pass
-    elif item.name == BACKSTAGE_PASSES:
-        pass
-    elif item.name == SULFURAS:
-        pass
-    else:
         if item.sell_in < 0:
             if item.quality > 0:
                 item.quality = item.quality - 1
