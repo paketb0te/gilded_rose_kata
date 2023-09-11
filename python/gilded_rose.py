@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from typing import Protocol
 
 AGED_BRIE = "Aged Brie"
 BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert"
@@ -44,6 +45,18 @@ def update_sulfuras(item: Item):
     pass
 
 
+class QualityUpdateFunc(Protocol):
+    def __call__(self, item: Item) -> None:
+        ...
+
+
+UPDATER_MAPPING: dict[str, QualityUpdateFunc] = {
+    AGED_BRIE: update_aged_brie,
+    BACKSTAGE_PASSES: update_backstage_passes,
+    SULFURAS: update_sulfuras,
+}
+
+
 def update_quality_of_all_items(items: list[Item]):
     for item in items:
         update_quality_of_single_item(item)
@@ -52,14 +65,8 @@ def update_quality_of_all_items(items: list[Item]):
 def update_quality_of_single_item(item: Item):
     update_sell_in_date(item)
 
-    if item.name == AGED_BRIE:
-        update_aged_brie(item)
-    elif item.name == BACKSTAGE_PASSES:
-        update_backstage_passes(item)
-    elif item.name == SULFURAS:
-        update_sulfuras(item)
-    else:
-        update_default_item(item)
+    update_quality = UPDATER_MAPPING.get(item.name, update_default_item)
+    update_quality(item=item)
 
 
 def update_sell_in_date(item: Item):
