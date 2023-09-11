@@ -42,7 +42,10 @@ def update_quality_of_single_item(item: Item):
     else:
         item.sell_in = item.sell_in - 1
     if item.sell_in < 0:
-        if item.name != AGED_BRIE:
+        if item.name == AGED_BRIE:
+            if item.quality < 50:
+                item.quality = item.quality + 1
+        else:
             if item.name == BACKSTAGE_PASSES:
                 item.quality = item.quality - item.quality
             else:
@@ -51,6 +54,3 @@ def update_quality_of_single_item(item: Item):
                         pass
                     else:
                         item.quality = item.quality - 1
-        else:
-            if item.quality < 50:
-                item.quality = item.quality + 1
