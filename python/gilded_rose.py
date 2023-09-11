@@ -17,18 +17,24 @@ class Item:
 
 
 def update_default_item(item: Item):
+    item.sell_in -= 1
+
     decrement = 2 if item.sell_in < 0 else 1
     new_quality = item.quality - decrement
     item.quality = max(new_quality, 0)
 
 
 def update_aged_brie(item: Item):
+    item.sell_in -= 1
+
     increase = 2 if item.sell_in < 0 else 1
     new_quality = item.quality + increase
     item.quality = min(new_quality, 50)
 
 
 def update_backstage_passes(item: Item):
+    item.sell_in -= 1
+
     if 5 <= item.sell_in < 10:
         increase = 2
     elif 0 <= item.sell_in < 5:
@@ -57,20 +63,11 @@ UPDATER_MAPPING: dict[str, QualityUpdateFunc] = {
 }
 
 
-def update_quality_of_all_items(items: list[Item]):
+def update_all_items(items: list[Item]):
     for item in items:
-        update_quality_of_single_item(item)
+        update_single_item(item)
 
 
-def update_quality_of_single_item(item: Item):
-    update_sell_in_date(item)
-
+def update_single_item(item: Item):
     update_quality = UPDATER_MAPPING.get(item.name, update_default_item)
     update_quality(item=item)
-
-
-def update_sell_in_date(item: Item):
-    if item.name == SULFURAS:
-        pass
-    else:
-        item.sell_in = item.sell_in - 1
