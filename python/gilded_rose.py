@@ -38,11 +38,9 @@ def update_sulfuras(item: Item):
 
 
 def update_default_item(item: Item):
-    if item.quality > 0:
-        item.quality = item.quality - 1
-    if item.sell_in < 0:
-        if item.quality > 0:
-            item.quality = item.quality - 1
+    decrement = 2 if item.sell_in < 0 else 1
+    new_quality = item.quality - decrement
+    item.quality = max(new_quality, 0)
 
 
 def update_backstage_passes(item: Item):
